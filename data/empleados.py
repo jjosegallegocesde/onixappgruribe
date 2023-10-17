@@ -38,4 +38,4 @@ for _ in range(50):
     salario = random.randint(1160000, 18000000)
     empleado = [nombre, cargo, edad, salario]
     empleados.append(empleado)
-print(empleados)
+
