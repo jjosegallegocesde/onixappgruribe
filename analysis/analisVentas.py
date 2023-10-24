@@ -1,6 +1,8 @@
 import pandas as pd
 
 from helpers.crearCSV import crearCSV
+from helpers.crearTablaHTML import crearTabla
+
 from data.ventas import ventas
 
 #1. Crear un CSV con los datos de las ventas
@@ -8,6 +10,8 @@ crearCSV(ventas,'ventas.csv')
 
 #2. Cargo la fuente datos y con PANDAS creo un DATAFRAME
 ventasDataFrame=pd.read_csv('data/ventas.csv')
+crearTabla(ventasDataFrame,'tablaventas')
+
 #print(ventasDataFrame)
 
 #3. Explorar los datos
@@ -24,15 +28,5 @@ examen6=ventasDataFrame.tail(50)
 #5. Modelar o aplicar modelos Estadistica
 
 #6. Presentar y exportar los datos
-print(examen1)
-print("\n")
-print(examen2)
-print("\n")
-print(examen3)
-print("\n")
-print(examen4)
-print("\n")
-print(examen5)
-print("\n")
-print(examen6)
+
 
