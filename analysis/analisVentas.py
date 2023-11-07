@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from helpers.crearCSV import crearCSV
 from helpers.crearTablaHTML import crearTabla
@@ -9,7 +10,8 @@ from data.ventas import ventas
 crearCSV(ventas,'ventas.csv')
 
 #2. Cargo la fuente datos y con PANDAS creo un DATAFRAME
-ventasDataFrame=pd.read_csv('data/ventas.csv')
+ventasDataFrame=pd.read_csv('data/ventas.csv', encoding='')
+
 crearTabla(ventasDataFrame,'tablaventas')
 
 #print(ventasDataFrame)
@@ -32,8 +34,23 @@ crearTabla(filtroUno,'ventasBajoCosto')
 
 
 
-#5. Modelar o aplicar modelos Estadistica
-
 #6. Presentar y exportar los datos
+ventasAltas=ventasDataFrame.nlargest(5,"Costo")
+ventasBajas=ventasDataFrame.nsmallest(5,"Costo")
+print(ventasBajas)
 
+#Graficando un DATAFRAME CON MATPLOTLIB
+ventasAltas["NumeroOrden"]=ventasAltas["NumeroOrden"].astype(str)
+colores=['blue','green','#EFEC1B','orange','purple']
+plt.figure(figsize=(10,10))
+plt.bar(ventasAltas["NumeroOrden"],ventasAltas["Costo"], color=colores)
 
+#Personalizando la gráfica
+
+plt.xlabel("Cliente")
+plt.ylabel("Costo")
+plt.title("Ventas mas altas en ultimo mes")
+plt.xticks(rotation=45)
+
+rutaGrafica="figuras/barrasventa.png"
+plt.savefig(rutaGrafica)
